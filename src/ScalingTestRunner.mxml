@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:adobe="http://www.adobe.com/2009/flexUnitUIRunner"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:runner="org.flexunit.runner.*"    
+	layout="vertical" minWidth="1024" minHeight="768"
+    initialize="core.addListener( new UIListener( runner ) )"
+    creationComplete="core.run( ScalingTests )" xmlns:flexui="flexunit.flexui.*">
+
+    <mx:Script>
+        <![CDATA[
+          	
+            import org.flexunit.listeners.UIListener;
+        ]]>
+    </mx:Script>
+
+    <runner:FlexUnitCore id="core" />
+    <adobe:TestRunnerBase id="runner"/>
+
+</mx:Application>

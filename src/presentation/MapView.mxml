@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:esri="http://www.esri.com/2008/ags"
+	addedToStage="dispatchEvent(new Event('configureIOC',true));"
+	>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.binding.utils.ChangeWatcher;
+			
+			import com.esri.ags.events.MapMouseEvent;
+			
+			[Bindable]
+			[Inject]
+			public var model:MapViewPM;
+			
+			//This is not in the spirit of Cairngorm 3, but it is too
+			// complex to apply the Presentation Model approach to 
+			// activating the drawing toolbar.
+			private function activateDrawing():void{
+				if (drawButton.selected){
+					drawToolbar.activate(Draw.POLYGON);
+				} else {
+					drawToolbar.deactivate();
+				}
+			}
+		]]>
+	</mx:Script>
+	<esri:SimpleMarkerSymbol 
+		id				="symSelected" 
+		color			="0xFFFF00" 
+		alpha			="0.8" 
+		size			="15" 
+		style			="circle">            
+		<esri:SimpleLineSymbol color="0xFF0000" width="2"/>        
+  	</esri:SimpleMarkerSymbol>
+	<esri:Draw 
+		id				="drawToolbar" 
+		map				="{map}" 
+		graphicsLayer	="{this.drawingLayer}" drawStart="drawingLayer.clear();" 
+		drawEnd			="model.selectStadiums(event.graphic.geometry)" />
+	<esri:Map id="map" >
+		<esri:ArcGISTiledMapServiceLayer url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"/>
+		<esri:ArcGISDynamicMapServiceLayer url="http://localhost/ArcGIS/rest/services/nfl/MapServer"/>
+		<esri:GraphicsLayer id="drawingLayer"/>
+		<esri:GraphicsLayer id="stadiumsLayer" graphicProvider="{model.stadiums.items}" symbol="{symSelected}"/>		
+	</esri:Map>
+	<mx:Button id="drawButton" toggle="true" click="activateDrawing()" label="fart"/>
+</mx:Canvas>

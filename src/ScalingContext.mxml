@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Object 
+	xmlns="http://www.spicefactory.org/parsley"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:presentation="presentation.*" 
+	xmlns:application="application.*" 
+	xmlns:esri="http://www.esri.com/2008/ags"
+	xmlns:domain="domain.*" xmlns:infrastructure="infrastructure.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import domain.Stadiums;
+			import infrastructure.StadiumService_ESRI;
+			
+			
+		]]>
+	</mx:Script>
+	
+	
+		
+	<!-- Application -->
+	<application:SelectStadiumsCommand/>
+		
+	<!-- Domain -->
+	<domain:Stadiums/>
+		
+	<!-- Infrastructure -->
+	<Object type="{StadiumService_ESRI}">
+		<ConstructorArgs>
+			<mx:String>http://esi-ggoodrich.esi.com/arcgis/rest/services/nfl/MapServer/0/query</mx:String>			
+		</ConstructorArgs>
+	</Object>
+		
+	<!-- Presentation -->
+	<presentation:MapViewPM/>
+	
+</mx:Object>
