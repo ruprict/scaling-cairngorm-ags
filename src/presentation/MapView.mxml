@@ -172,7 +172,7 @@
 		<esri:ArcGISTiledMapServiceLayer url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"/>
 		<esri:ArcGISDynamicMapServiceLayer url="http://localhost/ArcGIS/rest/services/nfl/MapServer"/>
 		<esri:GraphicsLayer id="drawingLayer" symbol="{sfs_w_default_line}"/>
-		<esri:GraphicsLayer id="stadiumsLayer" click="event.stopPropagation();model.stadiumSelected(event.target as Graphic);" graphicProvider="{model.stadiums.items}" symbol="{sms}"/>		
+		<esri:GraphicsLayer id="stadiumsLayer" rollOut=" if (drawButton.selected) activateDrawing()" rollOver="drawToolbar.deactivate()" click="model.stadiumSelected(event.target as Graphic);" graphicProvider="{model.stadiums.items}" symbol="{sms}"/>		
 	</esri:Map>
 	
 	
