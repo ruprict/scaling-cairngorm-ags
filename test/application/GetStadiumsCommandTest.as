@@ -25,11 +25,12 @@ package application
 			var mockery:MockRepository = new MockRepository();
 			var comm:SelectStadiumsCommand = new SelectStadiumsCommand();
 			var serv:IStadiumService = IStadiumService(mockery.createStrict(IStadiumService));
-			Expect.call(serv.getStadiumsForGeometry(new Polygon())).returnValue(new AsyncToken());
+			var poly:Polygon = new Polygon();
+			Expect.call(serv.getStadiumsForGeometry(poly)).returnValue(new AsyncToken());
 			comm.service = serv;
 			mockery.replay(serv);
 			//Act
-			comm.execute(new SelectStadiumsEvent(new Extent(1,2,3,4)));
+			comm.execute(new SelectStadiumsEvent(poly));
 			//Assert
 			mockery.verify(serv);
 		}

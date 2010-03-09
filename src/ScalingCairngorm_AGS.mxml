@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="horizontal" 
 	xmlns:presentation="presentation.*" 
 	xmlns:spicefactory="http://www.spicefactory.org/parsley">
 	
 	<spicefactory:ContextBuilder config="{ScalingContext}"/>
-	<presentation:MapView id="map"/>
+	<presentation:MapView id="map" width="70%"/>
+	<mx:VDividedBox width="30%" height="100%">
+		<presentation:StadiumView id="stadiumMap" height="50%" width="100%"/>
+		<mx:TextArea text="Hello" height="50%" width="100%"/>
+		
+	</mx:VDividedBox>
+	
 </mx:Application>

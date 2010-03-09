@@ -6,5 +6,11 @@ __Source code to support my user presentation at the 2010 ESRI Developers Summit
 ## Slideshare link
 
 ## Resources
-* linkys
+* [Cairngorm 3 downloads](http://opensource.adobe.com/wiki/display/cairngorm/Cairngorm+Libraries)
+* [A survey of Inversion of Control frameworks for Flex](http://www.adobe.com/devnet/flex/articles/ioc_frameworks.html)
+* [Parsely](http://www.spicefactory.org/parsely)
+* [FlexUnit4](http://opensource.adobe.com/wiki/display/flexunit/FlexUnit)
+* [ASMock](http://asmock.sourceforge.net/)
+* [Hamcrest] http://github.com/drewbourne/hamcrest-as3
+
 

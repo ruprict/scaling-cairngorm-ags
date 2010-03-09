@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="400" height="300" xmlns:esri="http://www.esri.com/2008/ags"
+	addedToStage="dispatchEvent(new Event('configureIOC',true));" xmlns:spicefactory="http://www.spicefactory.org/parsley" xmlns:observer="com.adobe.cairngorm.observer.*" xmlns:popup="com.adobe.cairngorm.popup.*">
+	<mx:Script>
+		<![CDATA[
+			import org.spicefactory.parsley.core.context.Context;
+			
+			[Inject]
+			[Bindable]
+			public var model:StadiumViewPM;
+			
+			[Inject]
+			[Bindable]
+			public var context:Context;
+			
+			private function updateExtent(object:Object):void{
+				trace("selected extent="+object);
+				
+				stadiumMap.extent = model.selectedExtent;
+				stadiumMap.level=15;
+			}
+			
+		]]>
+	</mx:Script>
+	<observer:Observe source="{model.selectedExtent.xmin}" 
+				handler="updateExtent"/>
+		
+	<esri:Map 
+		id							="stadiumMap"   
+		zoomSliderVisible			="true" 
+		panEnabled					="false" 
+		keyboardNavigationEnabled	="false"
+		
+		mapClick					="trace(model.selectedExtent);trace(stadiumMap.extent)"
+		
+		>
+		
+		<esri:ArcGISTiledMapServiceLayer 
+			url						="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"/>
+				
+	</esri:Map>
+	
+
+    
+
+</mx:Canvas>

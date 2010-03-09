@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:esri="http://www.esri.com/2008/ags"
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:esri="http://www.esri.com/2008/ags"
 	addedToStage="dispatchEvent(new Event('configureIOC',true));"
-	>
-	
+	xmlns:popup="com.adobe.cairngorm.popup.*" xmlns:presentation="presentation.*">
+	<mx:Style>
+		.mapStyle
+		{
+		    navigation-style-name: navStyle;
+		}
+		
+		.navStyle
+		{
+		    top: 50;
+		    left: NaN;
+		    right: 6;
+		    
+		}
+
+	</mx:Style>
 	<mx:Script>
 		<![CDATA[
+			import com.esri.ags.Graphic;
+			import mx.controls.Alert;
 			import mx.binding.utils.ChangeWatcher;
-			
 			import com.esri.ags.events.MapMouseEvent;
 			
 			[Bindable]
@@ -25,24 +40,140 @@
 			}
 		]]>
 	</mx:Script>
-	<esri:SimpleMarkerSymbol 
-		id				="symSelected" 
-		color			="0xFFFF00" 
-		alpha			="0.8" 
-		size			="15" 
-		style			="circle">            
-		<esri:SimpleLineSymbol color="0xFF0000" width="2"/>        
-  	</esri:SimpleMarkerSymbol>
+	
+	<esri:InfoSymbol id="infoSymbolWithStates">
+		<esri:infoRenderer>            
+			<mx:Component>                
+				<mx:VBox styleName="nflSymbol"             
+					click="clickHandler(event);"                    
+					rollOver="rollOverHandler(event)">                    
+					<mx:Style>                        
+						
+						.title{
+							fontWeight:bold;
+							fontSize:16;
+							color:"0x0000FF";
+						}    
+						.nflSymbol{
+							backgroundColor:"0xFFFFFF";
+						}          
+					</mx:Style>         
+					                  
+					<mx:Script>                        
+					<![CDATA[
+						import com.esri.ags.Graphic;
+						import application.StadiumSelectedEvent;
+						
+						private function clickHandler(event:Event):void {    
+							                        
+							switch (currentState){                                    
+								case "":                                        
+									currentState = "titleState";                                        
+									break;                                    
+								case "titleState":                                        
+									currentState = "detailState";                                        
+									break;                                    
+								case "detailState":                                        
+									currentState = "titleState";                                        
+									break;                                
+							}  
+							
+							                          
+						}                            
+						private function rollOverHandler(event:Event):void  {
+							if (currentState == null || currentState == "") {                                    
+								currentState = "titleState";                                
+							}
+							event.stopImmediatePropagation();
+							trace(currentState);                     
+						}                            
+						private function rollOutHandler(event:Event):void {                                
+							if (currentState == "titleState")                                
+							{                                    
+								currentState = "";                                
+							}  
+							trace(currentState);                          
+						}                            
+						private function effectStartHandler():void{                                
+							removeEventListener( MouseEvent.ROLL_OUT, rollOutHandler );                            
+						}                            
+						private function effectEndHandler():void 
+						{                                
+							addEventListener( MouseEvent.ROLL_OUT, rollOutHandler );                            
+						}                        
+					]]>                    
+					</mx:Script>                    
+					<mx:HBox id="titleBar">                        
+						<mx:Label text="{data.team}" styleName="title"/> 
+					</mx:HBox>
+					<mx:states>                        
+						<mx:State name="titleState">                            
+							<mx:AddChild relativeTo="{titleBar}" position="lastChild">                                
+								<mx:Label id="titleLabel" text="{data.conference}" 
+									rollOver="{Label(event.currentTarget).setStyle('textDecoration', 'underline');}"
+									rollOut="{Label(event.currentTarget).setStyle('textDecoration', 'none');}"
+									fontWeight="bold"
+								/>                            
+							</mx:AddChild>                            
+							                     
+						</mx:State>                        
+						<mx:State name="detailState" basedOn="titleState"> 
+							                         
+							                     
+							<mx:AddChild relativeTo="{this}">                                
+								<mx:Label id="line1Label" text="{(data.team=='Cowboys')?'They ROCK!':'They SUCK!'}"/>                            
+							</mx:AddChild>                        
+						</mx:State>                    
+					</mx:states>
+				 <mx:transitions>                        
+				 	<mx:Transition fromState="*" toState="titleState">                            
+				 		<mx:Sequence targets="{[titleLabel]}"                                
+				 			effectStart="effectStartHandler()"                                
+				 			effectEnd="effectEndHandler()" >                                
+				 			<mx:Resize target="{this}" duration="100"/>                                
+				 			<mx:AddChildAction/>                            
+				 		</mx:Sequence>                        
+			 		</mx:Transition>                        
+			 		<mx:Transition fromState="titleState" toState="detailState">
+			 			<mx:Sequence targets="{[line1Label]}">                                
+			 				<mx:Resize target="{this}" duration="100"/>                                
+			 				<mx:AddChildAction/>                            
+			 			</mx:Sequence>                        
+			 		</mx:Transition>                        
+			 		<mx:Transition fromState="detailState" toState="*"> 
+						<mx:Resize target="{this}" duration="100"/>                        
+					</mx:Transition>                        
+					<mx:Transition fromState="titleState" toState="*"> 
+						<mx:Resize target="{this}" duration="100"/>                        
+					</mx:Transition>                    
+				</mx:transitions>                
+			</mx:VBox>            
+		</mx:Component>        
+	</esri:infoRenderer>    
+</esri:InfoSymbol>
+	<mx:HBox width="100%" height="35" horizontalAlign="center" paddingTop="5" backgroundColor="#FFFFFF" >
+			<mx:Button id="drawButton" toggle="true" click="activateDrawing()" label="Select Stadiums"/>
+			<mx:Label id="extentLabel" text="Extent:"/>		
+	</mx:HBox>
+	 <esri:SimpleFillSymbol id="sfs_w_default_line">
+	             <esri:SimpleLineSymbol/>
+	 </esri:SimpleFillSymbol>
+	 <esri:SimpleMarkerSymbol id="sms"/>
 	<esri:Draw 
 		id				="drawToolbar" 
 		map				="{map}" 
 		graphicsLayer	="{this.drawingLayer}" drawStart="drawingLayer.clear();" 
 		drawEnd			="model.selectStadiums(event.graphic.geometry)" />
-	<esri:Map id="map" >
+	<esri:Map 
+		id				="map" 
+		styleName		="mapStyle" 
+		extentChange		="{this.extentLabel.text='('+map.extent.xmin+', '+map.extent.ymin+', '+map.extent.xmax+', '+map.extent.ymax+')'}" >
+		
 		<esri:ArcGISTiledMapServiceLayer url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"/>
 		<esri:ArcGISDynamicMapServiceLayer url="http://localhost/ArcGIS/rest/services/nfl/MapServer"/>
-		<esri:GraphicsLayer id="drawingLayer"/>
-		<esri:GraphicsLayer id="stadiumsLayer" graphicProvider="{model.stadiums.items}" symbol="{symSelected}"/>		
+		<esri:GraphicsLayer id="drawingLayer" symbol="{sfs_w_default_line}"/>
+		<esri:GraphicsLayer id="stadiumsLayer" click="event.stopPropagation();model.stadiumSelected(event.target as Graphic);" graphicProvider="{model.stadiums.items}" symbol="{sms}"/>		
 	</esri:Map>
-	<mx:Button id="drawButton" toggle="true" click="activateDrawing()" label="fart"/>
-</mx:Canvas>
+	
+	
+</mx:VBox>

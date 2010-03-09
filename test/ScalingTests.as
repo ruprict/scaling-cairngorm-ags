@@ -1,6 +1,7 @@
 package 
 {
 	import application.GetStadiumsCommandTest;
+	import application.StadiumSelectedCommandTest;
 	
 	import domain.StadiumTest;
 	import domain.StadiumsTest;
@@ -16,6 +17,7 @@ package
 		public var stadiumTest:StadiumTest;
 		public var stadiumsTest:StadiumsTest;
 		public var getStadiumsCommandTest:GetStadiumsCommandTest;
+		public var selectedStadium:StadiumSelectedCommandTest;
 		
     }
 }
