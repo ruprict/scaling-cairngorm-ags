@@ -39,23 +39,19 @@
 				verticalCenter="0" horizontalCenter="0"
 				mapClick					="trace(model.selectedExtent);trace(stadiumMap.extent)"
 				width						="400"
-				height						="300"
-				
-				>
-				
+				height						="300">				
 				<esri:ArcGISTiledMapServiceLayer 
 					url	="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"/>
-						
-			</esri:Map>
-			 <mx:Button  bottom="10" left="10"
-	            label="Close"
-	            click="model.popUpHandler.showStadium=false;dispatchEvent( new Event( Event.CLOSE ) )"/>
+				</esri:Map>
+			 	<mx:Button  bottom="10" left="10"
+	            	label="Close"
+	            	click="model.popUpHandler.showStadium=false;dispatchEvent( new Event( Event.CLOSE ) )"/>
 		</mx:TitleWindow>
        	<popup:behaviors>
-            	<mx:Array>
-                	<popup:AddPopUpToParsleyContext context="{ context }"/>
-            	</mx:Array>
-        	</popup:behaviors>
+        	<mx:Array>
+            	<popup:AddPopUpToParsleyContext context="{ context }"/>
+        	</mx:Array>
+    	</popup:behaviors>
     </popup:PopUpWrapper>
 
 </mx:Canvas>

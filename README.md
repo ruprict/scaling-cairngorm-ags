@@ -17,5 +17,6 @@ __Source code to support my user presentation at the 2010 ESRI Developers Summit
 * [FlexUnit4](http://opensource.adobe.com/wiki/display/flexunit/FlexUnit)
 * [ASMock](http://asmock.sourceforge.net/)
 * [Hamcrest] http://github.com/drewbourne/hamcrest-as3
+* [Great article on View Patterns by Paul Williams of Adobe](http://blogs.adobe.com/paulw/archives/2007/09/presentation_pa.html)
 
 
