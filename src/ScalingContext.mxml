@@ -27,13 +27,19 @@
 	<!-- Domain -->
 	<domain:Stadiums/>
 	<Object type="{Extent}">
-	<ConstructorArgs>
+		<ConstructorArgs>
 			<mx:Number>-113.072</mx:Number>
 			<mx:Number>26.36</mx:Number>
 			<mx:Number>-73.9599</mx:Number>
 			<mx:Number>44.648</mx:Number>
 		</ConstructorArgs>
 	</Object>
+	<Object type="{Stadium}" id="selectedStadium">
+		<ConstructorArgs>
+			<mx:String>Noone</mx:String>			
+		</ConstructorArgs>
+	</Object>
+	
 	<!-- Infrastructure -->
 	<Object type="{StadiumService_ESRI}">
 		<ConstructorArgs>
@@ -44,5 +50,6 @@
 	<!-- Presentation -->
 	<presentation:MapViewPM/>
 	<presentation:StadiumViewPM/>
+	<presentation:PopUpPresenter/>
 	
 </mx:Object>

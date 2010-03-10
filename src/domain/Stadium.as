@@ -1,18 +1,22 @@
 package domain
 {
 	import com.esri.ags.Graphic;
-	
+	[Bindable]
 	public class Stadium extends Graphic
 	{
 		
 		
-		//This is a value object....so it's immutable
+		
 		public function Stadium(team:String,conference:String="NFC"){
 			this.attributes={};
 			this.attributes.conference=conference;
 			this.attributes.team=team;	
+			
 		}
 		
+		public function set team(t:String):void{
+			this.attributes.team=t;
+		}
 		public function get team():String{
 			return this.attributes.team;
 		}

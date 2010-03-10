@@ -1,6 +1,6 @@
 package 
 {
-	import application.GetStadiumsCommandTest;
+	import application.SelectStadiumsCommandTest;
 	import application.StadiumSelectedCommandTest;
 	
 	import domain.StadiumTest;
@@ -16,7 +16,7 @@ package
 		public var mapViewPMTest:MapViewPMTest;
 		public var stadiumTest:StadiumTest;
 		public var stadiumsTest:StadiumsTest;
-		public var getStadiumsCommandTest:GetStadiumsCommandTest;
+		public var getStadiumsCommandTest:SelectStadiumsCommandTest;
 		public var selectedStadium:StadiumSelectedCommandTest;
 		
     }

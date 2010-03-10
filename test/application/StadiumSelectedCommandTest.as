@@ -1,5 +1,6 @@
 package application
 {
+	import com.esri.ags.geometry.Extent;
 	import com.esri.ags.geometry.MapPoint;
 	
 	import domain.Stadium;
@@ -14,7 +15,7 @@ package application
 		public function shouldSetSelectedStadiumOnModel():void{
 			//Arrange
 			var comm:StadiumSelectedCommand= new StadiumSelectedCommand();
-			
+			comm.selectedExtent= new Extent();
 			var stadium:Stadium = new Stadium("Cowboys","NFC");
 			 
 			var mp:MapPoint = new MapPoint(1,2);
@@ -22,7 +23,7 @@ package application
 			//Act
 			comm.execute(new StadiumSelectedEvent(stadium));
 			//Assert
-			assertThat(comm.selectedExtent.xmin,equalTo(mp.x-1));
+			assertThat(comm.selectedExtent.center.x,equalTo(mp.x));
 		}
 
 	}
