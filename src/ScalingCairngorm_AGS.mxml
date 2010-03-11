@@ -12,8 +12,8 @@
 	</mx:Script>
 	<mx:Style source="/css/skinPreview.css/"/>
 	<spicefactory:ContextBuilder config="{ScalingContext}"/>
+	
 	<presentation:MapView id="map" width="100%"/>
 	<presentation:StadiumView/>
-	
-	
+		
 </mx:Application>

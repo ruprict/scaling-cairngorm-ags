@@ -6,19 +6,15 @@
 	xmlns:application="application.*" 
 	xmlns:esri="http://www.esri.com/2008/ags"
 	xmlns:domain="domain.*" xmlns:infrastructure="infrastructure.*">
-	
 	<mx:Script>
 		<![CDATA[
 			import domain.Stadiums;
 			import domain.Stadium;
 			import com.esri.ags.geometry.Extent;
 			import infrastructure.StadiumService_ESRI;
-			
-			
+
 		]]>
 	</mx:Script>
-	
-	
 		
 	<!-- Application -->
 	<application:SelectStadiumsCommand/>

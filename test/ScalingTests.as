@@ -14,10 +14,10 @@ package
     public class ScalingTests
     {
 		public var mapViewPMTest:MapViewPMTest;
-		public var stadiumTest:StadiumTest;
-		public var stadiumsTest:StadiumsTest;
 		public var getStadiumsCommandTest:SelectStadiumsCommandTest;
-		public var selectedStadium:StadiumSelectedCommandTest;
+		/*public var stadiumTest:StadiumTest;
+		public var stadiumsTest:StadiumsTest;		
+		public var selectedStadium:StadiumSelectedCommandTest;*/
 		
     }
 }

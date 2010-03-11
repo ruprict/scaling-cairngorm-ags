@@ -20,7 +20,7 @@ package presentation
 		
 		[Inject]
 		[Bindable]
-		public var stadiums:Stadiums;
+		public var selectedStadiums:Stadiums;
 				
 		public function MapViewPM():void{
 			super();

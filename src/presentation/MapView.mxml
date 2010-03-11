@@ -40,7 +40,8 @@
 	<esri:Draw 
 		id				="drawToolbar" 
 		map				="{map}" 
-		graphicsLayer	="{this.drawingLayer}" drawStart="drawingLayer.clear();" 
+		graphicsLayer	="{this.drawingLayer}" 
+		drawStart		="drawingLayer.clear();" 
 		drawEnd			="model.selectStadiums(event.graphic.geometry)"
 		 />
 	<esri:Map 
@@ -54,16 +55,13 @@
 			rollOut					="drawToolbar.activate(com.esri.ags.toolbars.Draw.POLYGON)" 
 			rollOver				="drawToolbar.deactivate()" 
 			click					="model.stadiumSelected(event.target as Graphic);" 
-			graphicProvider			="{model.stadiums.items}"
+			graphicProvider			="{model.selectedStadiums.items}"
 			 >
 			 <esri:symbol>
 			 	<esri:SimpleMarkerSymbol id="sms_circleAlphaSizeOutline" color="0xFFFF00" alpha="0.8" size="15" style="circle">
 			 		<esri:SimpleLineSymbol color="0xFF0000" width="2"/>        
 			 	</esri:SimpleMarkerSymbol>
-			 </esri:symbol>
-			   
-			   
-			
+			 </esri:symbol>	   
 		</esri:GraphicsLayer>
 		<esri:extent>
 			<esri:Extent xmin="-133.54" ymin="15.996" xmax="-54.931" ymax="52.558"/>

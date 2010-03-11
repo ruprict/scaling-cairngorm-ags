@@ -5,8 +5,6 @@ package domain
 	public class Stadium extends Graphic
 	{
 		
-		
-		
 		public function Stadium(team:String,conference:String="NFC"){
 			this.attributes={};
 			this.attributes.conference=conference;
