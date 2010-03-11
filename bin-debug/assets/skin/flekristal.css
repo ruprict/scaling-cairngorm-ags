@@ -1,0 +1,38 @@
+
+
+/*
+//------------------------------
+//  Application
+//------------------------------
+*/
+Application {
+	backgroundColor: #333333;
+	fontStyle:normal;
+	fontFamily:arial;
+	fontWeight:normal;
+	fontSize:11;
+
+ }
+
+/*
+//------------------------------
+//  Button
+//------------------------------
+*/
+Button
+{
+	disabledSkin: Embed(source="assets/skin/flekristal_skin.swf", symbol="Button_disabledSkin");
+	downSkin: Embed(source="assets/skin/flekristal_skin.swf", symbol="Button_downSkin");
+	overSkin: Embed(source="assets/skin/flekristal_skin.swf", symbol="Button_overSkin");
+	upSkin: Embed(source="assets/skin/flekristal_skin.swf", symbol="Button_upSkin");
+}
+
+
+
+
+Canvas {
+	backgroundColor: #FFFFFF;
+	
+}
+
+/*
