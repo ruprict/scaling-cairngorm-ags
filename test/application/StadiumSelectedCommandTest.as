@@ -10,14 +10,12 @@ package application
 	
 	public class StadiumSelectedCommandTest
 	{
-		
 		[Test]
 		public function shouldSetSelectedStadiumOnModel():void{
 			//Arrange
 			var comm:StadiumSelectedCommand= new StadiumSelectedCommand();
 			comm.selectedExtent= new Extent();
 			var stadium:Stadium = new Stadium("Cowboys","NFC");
-			 
 			var mp:MapPoint = new MapPoint(1,2);
 			stadium.geometry =mp;
 			//Act
