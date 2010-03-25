@@ -15,9 +15,9 @@ package
     {
 		public var mapViewPMTest:MapViewPMTest;
 		public var getStadiumsCommandTest:SelectStadiumsCommandTest;
-		/*public var stadiumTest:StadiumTest;
+		public var stadiumTest:StadiumTest;
 		public var stadiumsTest:StadiumsTest;		
-		public var selectedStadium:StadiumSelectedCommandTest;*/
+		public var selectedStadium:StadiumSelectedCommandTest;
 		
     }
 }
