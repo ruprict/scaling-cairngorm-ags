@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
-	width="400" height="300" xmlns:esri="http://www.esri.com/2008/ags"
-	addedToStage="dispatchEvent(new Event('configureIOC',true));" 
-	xmlns:spicefactory="http://www.spicefactory.org/parsley" xmlns:observer="com.adobe.cairngorm.observer.*" 
+	width="400" height="300" xmlns:esri="http://www.esri.com/2008/ags" 
+	xmlns:observer="com.adobe.cairngorm.observer.*" 
 	xmlns:popup="com.adobe.cairngorm.popup.*">
 	<mx:Script>
 		<![CDATA[
-			import org.spicefactory.parsley.core.context.Context;
+
 			
 			[Inject]
 			[Bindable]
 			public var model:StadiumViewPM;
 			
-			[Inject]
-			[Bindable]
-			public var context:Context;
-			
+
 			private function updateExtent(object:Object):void{
 				trace("selected extent="+object);
 				if (stadiumMap!=null){
@@ -49,7 +45,7 @@
 		</mx:TitleWindow>
        	<popup:behaviors>
         	<mx:Array>
-            	<popup:AddPopUpToParsleyContext context="{ context }"/>
+            <!--	<popup:AddPopUpToParsleyContext context="{ context }"/>-->
         	</mx:Array>
     	</popup:behaviors>
     </popup:PopUpWrapper>

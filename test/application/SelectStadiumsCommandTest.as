@@ -11,6 +11,7 @@ package application
 	import infrastructure.IStadiumService;
 	
 	import mx.rpc.AsyncToken;
+	import mx.rpc.events.ResultEvent;
 	
 	import org.flexunit.assertThat;
 	import org.hamcrest.object.equalTo;
@@ -30,7 +31,7 @@ package application
 			comm.service = serv;
 			mockery.replay(serv);
 			//Act
-			comm.execute(new SelectStadiumsEvent(poly));
+			comm.execute();
 			//Assert
 			mockery.verify(serv);
 		}
@@ -40,13 +41,14 @@ package application
 			//Arrange
 			var comm:SelectStadiumsCommand = new SelectStadiumsCommand();
 			var stadiums:Stadiums = new Stadiums();
-			comm.selectedStadiums=stadiums;
+			//comm.selectedStadiums=stadiums;
 			var result:String=  '{"displayFieldName" : "conference","fieldAliases" : {"conference" : "conference","FID" : "FID","team" : "team"}, "geometryType" : "esriGeometryPoint",  "spatialReference" : {   "wkid" : 4326  },  "features" : [ { "attributes" : { "conference" : "NFC",  "FID" : 0, "team" : "Bears" }, "geometry" : { "x" : -87.6166719999999, "y" : 41.862306 }},{ "attributes" : { "conference" : "AFC",  "FID" : 1, "team" : "Bengals" }, "geometry" : { "x" : -84.516039, "y" : 39.095442 }}]}';
-						
+			var event:ResultEvent = new ResultEvent(ResultEvent.RESULT,false,true,result);
+			
 			//Act
-			comm.handleStadiums(result,new SelectStadiumsEvent(new Extent()));
+			comm.handleStadiums(event);
 			//Assert
-			assertThat(comm.selectedStadiums.items.length,equalTo(2));
+			//assertThat(comm.selectedStadiums.items.length,equalTo(2));
 		}
 
 	}

@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
-	xmlns:presentation="presentation.*" 
-	xmlns:spicefactory="http://www.spicefactory.org/parsley" 
-	xmlns:parsley="samples.parsley.*" xmlns:popup="com.adobe.cairngorm.popup.*"
+	xmlns:presentation="presentation.*" xmlns:application="application.*" 
+	
 	>
-	<mx:Script>
-		<![CDATA[
-			import org.spicefactory.parsley.core.context.Context;
-			
-		]]>
-	</mx:Script>
+	
 	<mx:Style source="/css/skinPreview.css/"/>
-	<spicefactory:ContextBuilder config="{ScalingContext}"/>
+	<application:ScalingContext contextView="{this}"/>
 	
 	<presentation:MapView id="map" width="100%"/>
 	<presentation:StadiumView/>

@@ -3,7 +3,9 @@ package application
 		
 	import com.adobe.serialization.json.JSON;
 	import com.esri.ags.Graphic;
+	import com.esri.ags.geometry.Geometry;
 	import com.esri.ags.geometry.MapPoint;
+	import com.esri.ags.geometry.Polygon;
 	
 	import domain.Stadiums;
 	
@@ -13,27 +15,39 @@ package application
 	import mx.controls.Alert;
 	import mx.rpc.AsyncToken;
 	import mx.rpc.Fault;
+	import mx.rpc.IResponder;
+	import mx.rpc.Responder;
+	import mx.rpc.events.ResultEvent;
 	
-	public class SelectStadiumsCommand
+	import org.robotlegs.mvcs.SignalCommand;
+	
+	public class SelectStadiumsCommand extends SignalCommand
 	{
 		
 		[Inject]
 		public var service:IStadiumService;
 		
 		[Inject]
-		public var selectedStadiums:Stadiums;
+		public var geometry:Polygon;
 		
-		[Command(selector="selectStadiums")]
-		public function execute(event:SelectStadiumsEvent):AsyncToken{
+		[Inject]
+		public var signal:SelectStadiumsSignal;
+		
+		[Inject]
+		public var stadiumsRecievedSignal:StadiumsRecievedSignal;
+		
+		override public function execute():void{
+			var responder:IResponder = new Responder(handleStadiums, handleFault);
+			var token:AsyncToken;
 			
-			return service.getStadiumsForGeometry(event.geometry);
+			token = service.getStadiumsForGeometry(geometry);
+			token.addResponder(responder);
 		}
 		
-		[CommandResult(selector="selectStadiums")]
-		public function handleStadiums(result:*,event:SelectStadiumsEvent):void{
+		public function handleStadiums(result:ResultEvent):void{
 			//Transform result
-			trace(result);
-			var res:Object = JSON.decode(result);
+			trace(result.result);
+			var res:Object = JSON.decode(result.result as String);
 			var graphics:Array = [];
 			for each (var feat:Object in res.features){
 				var graph:Graphic = new Graphic();
@@ -41,15 +55,14 @@ package application
 				graph.geometry = new MapPoint(feat.geometry.x,feat.geometry.y);
 				graphics.push(graph);
 			}
-			selectedStadiums.items.removeAll();
-			selectedStadiums.addStadiums(new ArrayCollection(graphics));
+			var stadiums:Stadiums = new Stadiums();
+			stadiums.addStadiums(new ArrayCollection(graphics));
+			stadiumsRecievedSignal.dispatch(stadiums);
 
 		}
 		
-		[CommandFault(selector="selectStadiums")]
-		public function handleFault(fault:Fault,event:SelectStadiumsEvent):void{
+		public function handleFault(fault:Fault,event:SelectStadiumsSignal):void{
 			Alert.show(fault.toString());
-
 		}
 		
 	}
