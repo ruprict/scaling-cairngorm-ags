@@ -44,7 +44,7 @@ package application
 			mockery.verify(serv);
 		}
 		
-		[Test]
+		[Test(async,timeout="500")]
 		public function shouldRaiseStadiumsRecievedSignal():void{
 			//Arrange
 			var comm:SelectStadiumsCommand = new SelectStadiumsCommand();
@@ -55,9 +55,9 @@ package application
 			var result:String=  '{"displayFieldName" : "conference","fieldAliases" : {"conference" : "conference","FID" : "FID","team" : "team"}, "geometryType" : "esriGeometryPoint",  "spatialReference" : {   "wkid" : 4326  },  "features" : [ { "attributes" : { "conference" : "NFC",  "FID" : 0, "team" : "Bears" }, "geometry" : { "x" : -87.6166719999999, "y" : 41.862306 }},{ "attributes" : { "conference" : "AFC",  "FID" : 1, "team" : "Bengals" }, "geometry" : { "x" : -84.516039, "y" : 39.095442 }}]}';
 			var event:ResultEvent = new ResultEvent(ResultEvent.RESULT,false,true,result);
 			
-			//var instance:SignalAsync =new SignalAsync(comm.stadiumsRecievedSignal); 
+			var instance:SignalAsync =new SignalAsync(comm.stadiumsRecievedSignal); 
 			//Act
-			//Async.proceedOnEvent(this,instance,SignalAsyncEvent.CALLED,500, handleStadiumsRecieved);
+			Async.handleEvent(this,instance,SignalAsyncEvent.CALLED, handleStadiumsRecieved);
 			comm.handleStadiums(event);
 			//Assert
 			assertThat(called);
