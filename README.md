@@ -1,7 +1,7 @@
 # Scaling Cairngorm with ArcGIS Server
 __Source code to support my user presentation at the 2010 ESRI Developers Summit__
 
-[Slideshare link to preso](http://slideshare.net/ruprict/scaling-cairngorms-ags)
+[Slideshare link to preso](http://slideshare.net/ruprict/scaling-cairngorms)
 
 ## Setup
 1. Clone (or fork) the repo: git clone git://github.com/ruprict/scaling-cairngorm.git
